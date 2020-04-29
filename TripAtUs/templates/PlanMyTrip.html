@@ -1,0 +1,64 @@
+{% extends 'MainBase.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load leaflet_tags %}
+
+<script type="text/javascript" src="{% static 'dist/leaflet.ajax.js' %}"></script>
+
+<div>
+    <h2 class="h2" style="text-align: center; margin-top: 40px;">Awesome! We have found you a perfect hotel!</h2>
+</div>
+
+<div>
+    <ul class="list-group" style="width: 60%; margin-top: 40px; margin-left: 80px;">
+        {% for hotel in Hotel %}
+    <li class="list-group-item" style="font-size: 25px;">
+        {{ hotel }}   
+    </li>
+    {% endfor %}
+    </ul>
+</div>
+
+<script type="text/javascript">
+
+    $.ajax({ 
+            type: 'GET', 
+            url: 'location', 
+            //data: { get_param: 'value' }, 
+            dataType: 'json',
+            success: function (data, status) { 
+                console.log(data);
+                geojson = data
+            }
+        });
+
+
+    function our_layers(map,options){
+
+        var points = new L.geoJson.ajax("{% url 'location' %}",{
+
+        });
+
+        points.addTo(map);
+
+    };
+
+</script>
+
+<div style="margin-top: 45px; align-content: center; margin-left: 250px; margin-bottom: 50px;">
+    {% leaflet_map "gis" callback="window.our_layers" %}
+</div>
+
+<div>
+    <h4 class="h4" style="text-align: center; margin-top: 20px; font-style: italic; color: blue;"> Now all that is left is planning your itineary! Hit the button below and a curated itineary will be in your email within no time :)</h4>
+</div>
+
+<div>
+    <button class="btn btn-primary" style="margin-top: 20px; margin-bottom: 30px; font-size: large; text-align: center; margin-left: 1000px;">
+        <a style="color: white;">Plan My Trip!</a>
+    </button>    
+</div>
+
+
+{% endblock %}

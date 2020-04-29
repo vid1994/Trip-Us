@@ -1,0 +1,40 @@
+from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
+from .forms import hotelRequirementsForm
+from Service_Scripts import Main
+
+# Create your views here.
+
+
+#########################|
+## BOOK MY HOTEL VIEW  ##|
+#########################|
+
+def BookHotelView(request):
+    if request.method == "GET":
+        form = hotelRequirementsForm()
+    else:
+
+ #       try:
+        username = request.user.username
+        #print("Atleast it is coming here!") ### DEBUGGING
+        form = hotelRequirementsForm(request.POST)
+        print(form.data)
+        
+        score = Main.BookHotel(form.data, username)
+
+        print(score['Hotel'].tolist())
+
+        context = {"Hotel": score['Hotel'].tolist()}
+
+        return render(request, 'PlanMyTrip.html', context)
+
+#        except:
+#            form = hotelRequirementsForm()
+
+#            return render(request, 'BookMyHotel.html', {'form': form})
+
+    return render(request, 'BookMyHotel.html', {'form': form})
+
+
+

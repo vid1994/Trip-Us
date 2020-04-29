@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div style="margin-top: 40px; margin-left: 40px;">
+    <h1 class="h1">Signup here :)</h1>
+</div>
+<div class="offset-1 col-md-8" style="margin-top: 25px;">
+<form method="POST" class="form-group">
+    {% csrf_token %}
+    <div class="offset-1 col-md-4" style="margin-top: 225;">
+        <form method="POST">
+            {% csrf_token %}
+            {{form|crispy}}
+            <input type="submit" class="btn btn-primary">
+        </form>
+    </div>
+</form>
+</div>
+{% endblock %}
+
+
+
