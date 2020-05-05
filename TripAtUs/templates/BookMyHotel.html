@@ -20,33 +20,11 @@
     </form>
 </div>
 
-<script type="text/javascript">
-
-    $.ajax({ 
-        type: 'GET', 
-        url: 'location', 
-        //data: { get_param: 'value' }, 
-        dataType: 'json',
-        success: function (data, status) { 
-            console.log(data);
-            geojson = data
-        }
-    });
-
-    function our_layers(map,options){
-        var Location = L.geojson.ajax("{% url 'location' %}",{
-
-        });
-
-    };
-
-
 </script>
 
 <div style="margin-top: 45px; align-content: center; margin-left: 250px; margin-bottom: 50px;">
     {% leaflet_map "gis" callback="window.our_layers" %}
 </div>
-
 
 
 {% endblock %}

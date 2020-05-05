@@ -26,22 +26,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href=""><h4><span style="font-weight: normal;">Book My Hotel</span></h4><span class="sr-only">(current)</span></a>
+              <a class="nav-link" href=""><h4><span style="font-weight: 400;color: honeydew ;font-size: large ; margin-left: 50 px;">About</span></h4><span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="#"><h4><span style="font-weight: normal;">Plan My Trip</span></h4><span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{% url 'Telebot' %}"><h4><span style="font-weight: 400;color: honeydew ; font-size: large; ">Explore Telebot</span></h4><span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link disabled" href="http://127.0.0.1:8000/"><h4><span style="font-weight: normal;">Explore Telebot</span></h4><span class="sr-only">(current)</span></a>
+              <a class="nav-link disabled" href="{% url 'Feedback' %}"><h4><span style="font-weight: 400;color: honeydew ; font-size: large; ">Feedback & Contact Us</span></h4><span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item active" style="margin-left: 900px;">
-                <a class="nav-link disabled" href="{% url 'logout' %}"><h4><span style="font-weight: normal;">Logout</span></h4><span class="sr-only">(current)</span></a>
+            <li class="nav-item active" style="margin-right: 50px;">
+                <a class="nav-link disabled" href="{% url 'logout' %}"><h4><span style="font-weight: 400; font-size: large;">Logout</span></h4><span class="sr-only">(current)</span></a>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-primary" type="submit">Search</button>
-          </form>
         </div>
     </nav>
 

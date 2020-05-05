@@ -10211,3 +10211,19 @@ form .row:first-child .floating-label-form-group {
 .copyright {
   background-color: #1a252f;
 }
+
+.boxDiv {
+  min-height: 150px;
+  padding-left: 20px;
+  font-weight: 900;
+  font-style: italic;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
+  color: black;
+  border-style: solid;
+  border-top-style: groove;
+  
+
+  border-width: 0.3cm;
+  border-color: cornflowerblue;
+  
+}

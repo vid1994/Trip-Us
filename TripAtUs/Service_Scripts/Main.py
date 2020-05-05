@@ -126,19 +126,22 @@ def Hotel_Extraction():
     rating = []
     latitude = []
     longitude = []
+    img = []
     
     for document in collection.find():
-        hotel.append(document['Hotel'])
+        hotel.append(document['Name'])
         rating.append(document['Rating'])
         price.append(document['Price'])
-        latitude.append(document['Latitude'])
-        longitude.append(document['Longitude'])
+        latitude.append(document['X'])
+        longitude.append(document['Y'])
+        img.append(document['Image'])
         
     hotelDB['Hotel'] = hotel
     hotelDB['Price'] = price
     hotelDB['Rating'] = rating
     hotelDB['Latitude'] = latitude
     hotelDB['Longitude'] = longitude
+    hotelDB['Image'] = img
         
     hotelDB.replace("", np.nan, inplace=True)
     
@@ -152,8 +155,13 @@ def searchHotel(request, scoreDf):
     
     hotelsDF = Hotel_Extraction()
     hotelsDF[['Price']] = hotelsDF[['Price']].apply(pd.to_numeric)
+    hotelsDF[['Rating']] = hotelsDF[['Rating']].apply(pd.to_numeric)
     
     max_price = float(request['Maximum_Price'])
+    rating = float(request['Minimum_Rating'])
+    
+    print(max_price, rating)
+    
     
     nodeLatitude = scoreDf['Latitudes']
     nodeLongitude = scoreDf['Longitudes']
@@ -161,6 +169,7 @@ def searchHotel(request, scoreDf):
     print(nodeLatitude, nodeLongitude)
     
     Filtered_df = hotelsDF[hotelsDF['Price'] <= max_price]
+    Filtered_df = hotelsDF[hotelsDF['Rating'] >= rating]
     
     print(Filtered_df)
     
@@ -169,6 +178,7 @@ def searchHotel(request, scoreDf):
     hotel_lat = []
     hotel_lng = []
     Distance_list = []
+    img = []
     
     if not Filtered_df.empty:
         for index, rows in Filtered_df.iterrows():
@@ -177,11 +187,13 @@ def searchHotel(request, scoreDf):
             Distance_list.append(distance)
             hotel_lat.append(rows['Latitude'])
             hotel_lng.append(rows['Longitude'])
+            img.append(rows['Image'])
             
     Result_df['Hotel'] = hotel
     Result_df['Distance'] = Distance_list
     Result_df['Latitude'] = hotel_lat
     Result_df['Longitude'] = hotel_lng
+    Result_df['Image'] = img
     
     print(Result_df)
     

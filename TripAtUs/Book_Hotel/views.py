@@ -23,9 +23,14 @@ def BookHotelView(request):
         
         score = Main.BookHotel(form.data, username)
 
-        print(score['Hotel'].tolist())
+        Hotel_name = score['Hotel'].tolist()
+        Hotel_img = score['Image'].tolist()
+        Hotel_list = zip(Hotel_name, Hotel_img)
 
-        context = {"Hotel": score['Hotel'].tolist()}
+        print(Hotel_name)
+        print(Hotel_img)
+
+        context = {"Hotel": Hotel_list}
 
         return render(request, 'PlanMyTrip.html', context)
 

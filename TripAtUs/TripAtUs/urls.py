@@ -19,6 +19,8 @@ from django.conf.urls import include, url
 from .views import home, locationPlotter
 from accounts.views import login_view, register_view, logout_view
 from Book_Hotel.views import BookHotelView
+from Feedback.views import FeedbackView
+from Telebot.views import telebotview
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +28,8 @@ urlpatterns = [
     path('accounts/register/', register_view, name='signup'),
     path('accounts/logout', logout_view, name='logout'),
     path('BookHotel', BookHotelView, name='BookHotel'),
-    path('', home),
-    url(r'^location/$', locationPlotter, name='location')
+    path('Telebot' , telebotview, name='Telebot'),
+    path('', home, name='Home'),
+    url(r'^location/$', locationPlotter, name='location'),
+    path('Feedback', FeedbackView, name = 'Feedback')
 ]

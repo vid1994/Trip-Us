@@ -187,7 +187,8 @@ def placesToVisit(travellingWith, preferenceList, timeSpent, username):
     
     location_dict = {"Locations": location,
                  "Latitude": latitude,
-                 "Longitude": longitude}
+                 "Longitude": longitude,
+                 "Duration of trip": timeSpent}
 
     collection.update_one({'username':username},{'$set': location_dict}, upsert=True)
             
