@@ -37,6 +37,9 @@ def home(request, *args, **kwargs):
             preferenceList = [float(x) for x in preferenceList]
             timeSpent = float(form.data['Time_Spent_Days'])
             username = request.user.username
+
+            print(travellingWith, preferenceList, timeSpent, username)
+
             location, description, img = placesToVisit(travellingWith,preferenceList,timeSpent,username)
             Location_list = zip(location, description, img)
             context={
