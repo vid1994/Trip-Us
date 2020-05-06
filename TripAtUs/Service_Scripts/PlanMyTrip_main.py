@@ -252,12 +252,7 @@ def checkCurrentState(parent,child):
             parent[element1]=1
     return parent
 
-    
-    
-import os    
-os.chdir("C:/Users/vidis/OneDrive/Desktop/RoadWarriors")
-    
-from GeneticAlgoSearchSpace import geneticAlgorithm
+
 
 class Node_A():
     """A node class for A* Pathfinding"""
