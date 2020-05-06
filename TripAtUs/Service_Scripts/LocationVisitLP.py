@@ -65,7 +65,6 @@ def LocationListing(item):
     
     return new_item
 
-#%%
 def Flatten(list1):
     list2 = []
     for sublist in list1:
@@ -73,9 +72,6 @@ def Flatten(list1):
             list2.append(item)
             
     return list2
-            
-#%%    
-
 
 def placesToVisit(travellingWith, preferenceList, timeSpent, username):
     
@@ -228,5 +224,5 @@ def placesToVisit(travellingWith, preferenceList, timeSpent, username):
             
     return location, description, img_src
     
-#%%
-#locations = placesToVisit(travellingWith="Family", preferenceList=[1,3,2,1,2,1],timeSpent=3,username='mark')
+
+locations = placesToVisit(travellingWith="Family", preferenceList=[1,3,2,1,2,1],timeSpent=3,username='mark')
