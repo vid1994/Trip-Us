@@ -654,21 +654,58 @@ def CombinationsToAnalyse(Attractions, Duration_of_visit):
 # combinations_to_analyse = CombinationsToAnalyse(Attractions, duration)
 
 def timeSpent(Attractions):
-    import os
-    os.chdir("C:/Users/vidis/OneDrive/Desktop")
-    Attraction_Df = pd.read_excel("AttractionDB (Clean with Full Data) 27th April 2204.xlsx", sheet_name = 'Sheet1')
+    
+    Mongourl = "mongodb+srv://vidish:tripatus@cluster0-jzyrn.mongodb.net/test"
+    
+    client = MongoClient(Mongourl)
+    
+    d = dict((db, [collection for collection in client[db].collection_names()])
+        for db in client.database_names())
+
+    db = client.TravelPlan
+    
+    collection = db.AttractionDB
+    
+    
+    print("-------------CONNECTION SUCCESSFUL----------------------")
+    
+    Attractions = []
+    Categories = []
+    Likeability_Solo = []
+    Likeability_Family = []
+    Likeability_Friends = []
+    Time_Spent = []
+    Latitude = []
+    Longitude = []
+    Description = []
+    Image_Path = []
+        
+    for doc in collection.find():
+        Attractions.append(doc['PAGETITLE'])
+        Categories.append(doc['Leaf Node Category'])
+        Likeability_Solo.append(doc['Likeability Solo'])
+        Likeability_Family.append(doc['Likeability Family'])
+        Likeability_Friends.append(doc['Likeability Friends'])
+        Time_Spent.append(doc['Hour'])
+        Latitude.append(doc['Latitude'])
+        Longitude.append(doc['Longitude'])
+        Description.append(doc['Description'])
+        Image_Path.append(doc['Image Path'])
+    
     
     Likeability_Df = pd.DataFrame()
-    Likeability_Df['Attractions'] = Attraction_Df['PAGETITLE'].tolist()
-    Likeability_Df['Attraction Category'] = Attraction_Df['Leaf Node Category'].tolist()
-    Likeability_Df['Popularity (solo)'] = Attraction_Df['Likeability Solo'].tolist()
-    Likeability_Df['Popularity (Family)'] = Attraction_Df['Likeability Family'].tolist()
-    Likeability_Df['Popularity (Friends)'] = Attraction_Df['Likeability Friends'].tolist()
-    Likeability_Df['Time Spent'] = Attraction_Df['Hour'].tolist()
-    Likeability_Df['Latitude'] = Attraction_Df['Latitude'].tolist()
-    Likeability_Df['Longitude'] = Attraction_Df['Longitude'].tolist()
-    Likeability_Df['Description'] = Attraction_Df['Description'].tolist()
-    Likeability_Df['Image Path'] = Attraction_Df['Image Path'].tolist()
+    
+    Likeability_Df['Attractions'] = Attractions
+    Likeability_Df['Attraction Category'] = Categories
+    Likeability_Df['Popularity (solo)'] = [float(x) for x in Likeability_Solo]
+    Likeability_Df['Popularity (Family)'] = [float(x) for x in Likeability_Family]
+    Likeability_Df['Popularity (Friends)'] = [float(x) for x in Likeability_Friends]
+    Likeability_Df['Time Spent'] = [float(x) for x in Time_Spent]
+    Likeability_Df['Latitude'] = [float(x) for x in Latitude]
+    Likeability_Df['Longitude'] = [float(x) for x in Longitude]
+    Likeability_Df['Description'] = Description
+    Likeability_Df['Image Path'] = Image_Path
+
     
     TimeSpent = []
     for locations in Attractions['Location'].tolist():
