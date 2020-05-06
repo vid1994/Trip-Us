@@ -24,9 +24,6 @@ Outputs
 
 """
 
-        
-#%%
-
 """
 Heuristic Definitions for the A*Search 
 --------------------------------------
@@ -107,7 +104,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
 import smtplib
-from StaticMap import *
+from .StaticMap import *
 from docx.enum.text import WD_BREAK
 from GeneticAlgoSearchSpace import geneticAlgorithm
 
