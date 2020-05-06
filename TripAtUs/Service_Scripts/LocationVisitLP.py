@@ -181,11 +181,12 @@ def placesToVisit(travellingWith, preferenceList, timeSpent, username):
         
     problem.solve()
     
-#    descriptions = []
-#    
-#    for place in v.varValue:  
-#        placeDescription = Likeability_Df[Likeability_Df['Attractions'] == place]['']
-#        descriptions.append(placeDescription)
+    descriptions = []
+    
+    for place in v.varValue:  
+        placeDescription = Likeability_Df[Likeability_Df['Attractions'] == place]['']
+        descriptions.append(placeDescription)
+    
     location = []
     
     for v in problem.variables():
@@ -221,8 +222,11 @@ def placesToVisit(travellingWith, preferenceList, timeSpent, username):
     collection = db.PlacesToVisit
 
     collection.update_one({'username':username},{'$set': location_dict}, upsert=True)
+    
+    print(location)
+    print(description)
+    print(img_src)
             
     return location, description, img_src
     
 
-locations, desc, img = placesToVisit(travellingWith="Family", preferenceList=[1,3,2,1,2,1],timeSpent=3,username='mark')
