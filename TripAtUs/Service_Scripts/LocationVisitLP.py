@@ -90,6 +90,11 @@ def placesToVisit(travellingWith, preferenceList, timeSpent, username):
     
     collection = db.AttractionDB
     
+    for doc in collection.find():
+        document = doc
+    
+    return document
+    
     print("-------------CONNECTION SUCCESSFUL----------------------")
     
     Attractions = []
@@ -102,6 +107,7 @@ def placesToVisit(travellingWith, preferenceList, timeSpent, username):
     Longitude = []
     Description = []
     Image_Path = []
+        
     
     for doc in collection.find():
         Attractions.append(doc['PAGETITLE'])
@@ -215,10 +221,12 @@ def placesToVisit(travellingWith, preferenceList, timeSpent, username):
                  "Longitude": longitude,
                  "Duration of trip": timeSpent,
                  "User_Preferences": preferenceWeights}
+    
+    collection = db.PlacesToVisit
 
     collection.update_one({'username':username},{'$set': location_dict}, upsert=True)
             
     return location, description, img_src
     
 #%%
-locations = placesToVisit(travellingWith="Family", preferenceList=[1,3,2,1,2,1],timeSpent=3,username='mark')
+#locations = placesToVisit(travellingWith="Family", preferenceList=[1,3,2,1,2,1],timeSpent=3,username='mark')
