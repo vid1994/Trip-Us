@@ -86,10 +86,6 @@ def placesToVisit(travellingWith, preferenceList, timeSpent, username):
     
     collection = db.AttractionDB
     
-    for doc in collection.find():
-        document = doc
-    
-    return document
     
     print("-------------CONNECTION SUCCESSFUL----------------------")
     
@@ -180,17 +176,12 @@ def placesToVisit(travellingWith, preferenceList, timeSpent, username):
     problem += pulp.lpSum([x[i]*Time[i] for i in Likeability_Df['Attractions'].tolist()]) <= (timeSpent*10)
         
     problem.solve()
-    
-    descriptions = []
-    
-    for place in v.varValue:  
-        placeDescription = Likeability_Df[Likeability_Df['Attractions'] == place]['']
-        descriptions.append(placeDescription)
-    
+        
     location = []
     
     for v in problem.variables():
         if v.varValue == 1:
+            print(v.name)
             location.append(LocationListing(v.name))
     
     latitude = []
