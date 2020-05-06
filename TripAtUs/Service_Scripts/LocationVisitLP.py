@@ -88,27 +88,50 @@ def placesToVisit(travellingWith, preferenceList, timeSpent, username):
 
     db = client.TravelPlan
     
-    collection = db.PlacesToVisit
+    collection = db.AttractionDB
     
     print("-------------CONNECTION SUCCESSFUL----------------------")
     
-    os.chdir("C:/Users/vidis/OneDrive/Desktop")
+    Attractions = []
+    Categories = []
+    Likeability_Solo = []
+    Likeability_Family = []
+    Likeability_Friends = []
+    Time_Spent = []
+    Latitude = []
+    Longitude = []
+    Description = []
+    Image_Path = []
     
-    Attraction_Df = pd.read_excel("AttractionDB (Clean with Full Data) 27th April 2204.xlsx", sheet_name = 'Sheet1')
+    for doc in collection.find():
+        Attractions.append(doc['PAGETITLE'])
+        Categories.append(doc['Leaf Node Category'])
+        Likeability_Solo.append(doc['Likeability Solo'])
+        Likeability_Family.append(doc['Likeability Family'])
+        Likeability_Friends.append(doc['Likeability Friends'])
+        Time_Spent.append(doc['Hour'])
+        Latitude.append(doc['Latitude'])
+        Longitude.append(doc['Longitude'])
+        Description.append(doc['Description'])
+        Image_Path.append(doc['Image Path'])
+    # os.chdir("C:/Users/vidis/OneDrive/Desktop")
+    
+    # Attraction_Df = pd.read_excel("AttractionDB (Clean with Full Data) 27th April 2204.xlsx", sheet_name = 'Sheet1')
     
     Likeability_Df = pd.DataFrame()
-    Likeability_Df['Attractions'] = Attraction_Df['PAGETITLE'].tolist()
-    Likeability_Df['Attraction Category'] = Attraction_Df['Leaf Node Category'].tolist()
-    Likeability_Df['Popularity (solo)'] = Attraction_Df['Likeability Solo'].tolist()
-    Likeability_Df['Popularity (Family)'] = Attraction_Df['Likeability Family'].tolist()
-    Likeability_Df['Popularity (Friends)'] = Attraction_Df['Likeability Friends'].tolist()
-    Likeability_Df['Time Spent'] = Attraction_Df['Hour'].tolist()
-    Likeability_Df['Latitude'] = Attraction_Df['Latitude'].tolist()
-    Likeability_Df['Longitude'] = Attraction_Df['Longitude'].tolist()
-    Likeability_Df['Description'] = Attraction_Df['Description'].tolist()
-    Likeability_Df['Image Path'] = Attraction_Df['Image Path'].tolist()
     
-    print(Likeability_Df)
+    Likeability_Df['Attractions'] = Attractions
+    Likeability_Df['Attraction Category'] = Categories
+    Likeability_Df['Popularity (solo)'] = [float(x) for x in Likeability_Solo]
+    Likeability_Df['Popularity (Family)'] = [float(x) for x in Likeability_Family]
+    Likeability_Df['Popularity (Friends)'] = [float(x) for x in Likeability_Friends]
+    Likeability_Df['Time Spent'] = [float(x) for x in Time_Spent]
+    Likeability_Df['Latitude'] = [float(x) for x in Latitude]
+    Likeability_Df['Longitude'] = [float(x) for x in Longitude]
+    Likeability_Df['Description'] = Description
+    Likeability_Df['Image Path'] = Image_Path
+    
+    print(Likeability_Df.shape)
     
     preferenceWeights = []
     for index, rows in Likeability_Df.iterrows():
@@ -124,10 +147,12 @@ def placesToVisit(travellingWith, preferenceList, timeSpent, username):
             preferenceWeights.append(preferenceList[4])
         elif rows['Attraction Category'] == "Fun-Things-To-Do":
             preferenceWeights.append(preferenceList[5])
+
             
-    
+    print(len(preferenceWeights))
     Likeability_Df['Preference Weights'] = preferenceWeights
             
+        
     problem = LpProblem("LocationDecider", LpMaximize)
 
 
@@ -188,11 +213,12 @@ def placesToVisit(travellingWith, preferenceList, timeSpent, username):
     location_dict = {"Locations": location,
                  "Latitude": latitude,
                  "Longitude": longitude,
-                 "Duration of trip": timeSpent}
+                 "Duration of trip": timeSpent,
+                 "User_Preferences": preferenceWeights}
 
     collection.update_one({'username':username},{'$set': location_dict}, upsert=True)
             
     return location, description, img_src
     
-
-#locations = placesToVisit(travellingWith="Family", preferenceList=[1,3,2,1,2,1],timeSpent=3)
+#%%
+locations = placesToVisit(travellingWith="Family", preferenceList=[1,3,2,1,2,1],timeSpent=3,username='mark')
