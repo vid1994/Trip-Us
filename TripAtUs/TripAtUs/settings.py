@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django.contrib.gis',
     'leaflet',
+    'django_celery_beat'
 
     #own
     'accounts',
@@ -165,6 +166,24 @@ LEAFLET_CONFIG = {
     'SCALE': 'metric',
     'ATTRIBUTION_PREFIX': "Inspired by Trip@Us Corporation"
 }
+
+# Celery settings - celery broker is rabbitmq
+
+CELERY_BROKER_URL = "amqp://tripatus:tripatus2020@localhost:5672/myvhost"
+
+
+# for security reasons, mention the list of accepted content-types (in this case json)
+
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
+CELERY_TIMEZONE = 'Europe/Berlin'
+
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+
+
 
 Q_CLUSTER = {
     'name': 'TripAtUs',
