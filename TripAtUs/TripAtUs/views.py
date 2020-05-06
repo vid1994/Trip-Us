@@ -7,6 +7,7 @@ from django.http import HttpResponse
 import urllib
 from pymongo import MongoClient
 from Service_Scripts.BaseMapPltCds import df_to_geojson, LocationExtraction
+from PlanMyTrip.views import async_task
 import dns
 import json
 

@@ -21,6 +21,7 @@ from accounts.views import login_view, register_view, logout_view
 from Book_Hotel.views import BookHotelView
 from Feedback.views import FeedbackView
 from Telebot.views import telebotview
+from PlanMyTrip.views import async_task
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,5 +32,6 @@ urlpatterns = [
     path('Telebot' , telebotview, name='Telebot'),
     path('', home, name='Home'),
     url(r'^location/$', locationPlotter, name='location'),
-    path('Feedback', FeedbackView, name = 'Feedback')
+    path('Feedback', FeedbackView, name = 'Feedback'),
+    url(r'^send_command$', async_task, name='send_command')
 ]

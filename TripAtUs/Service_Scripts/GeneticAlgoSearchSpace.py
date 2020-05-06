@@ -2,7 +2,7 @@
 """
 Created on Sat Mar 21 23:08:40 2020
 
-@author: vidis
+@author: vidish
 """
 
 import pandas as pd
@@ -80,7 +80,8 @@ class LocationPreference:
     
     
 class FitnessFunction:
-    def __init__(self, route):
+    def __init__(self, route, Hotel_list):
+        self.Hotel = Hotel_list
         self.route = route
         self.distance = 0
         self.fitness = 0.0
@@ -95,11 +96,15 @@ class FitnessFunction:
         if self.distance == 0:
             while i < len(self.route):
                 fromPlace = LocationPreference(self.route[i][0], self.route[i][1])
-                if i + 1 < len(self.route):
+                if i == 0:
+                    fromPlace = LocationPreference(self.Hotel[i][0], self.Hotel[i][1])
+                    toPlace = self.route[i]
+                    self.distance = self.distance + fromPlace.Distance(toPlace[1], toPlace[0])     
+                elif i + 1 < len(self.route):
                     toPlace = self.route[i+1]
                     self.distance = self.distance + fromPlace.Distance(toPlace[1], toPlace[0])
                 else:
-                    toPlace = self.route[0]
+                    toPlace = self.Hotel[0]
                     self.distance = self.distance + fromPlace.Distance(toPlace[1], toPlace[0])
                 i = i + 1
         
@@ -132,10 +137,10 @@ class CreateRoute():
     
 
 
-def rankRoutes(population):
+def rankRoutes(population, Hotel_list):
     fitnessResults = {}
     for i in range(0,len(population)):
-        fitnessResults[i] = FitnessFunction(population[i]).routeFitness()
+        fitnessResults[i] = FitnessFunction(population[i], Hotel_list).routeFitness()
     return sorted(fitnessResults.items(), key = operator.itemgetter(1), reverse = True)
 
 
@@ -248,49 +253,62 @@ class NextGeneration:
         self.eliteSize = eliteSize
         self.mutationRate = mutationRate
     
-    def nextGeneration(currentGen, eliteSize, mutationRate):
-        popRanked = rankRoutes(currentGen)
+    def nextGeneration(self, currentGen, eliteSize, mutationRate, Hotel_list):
+        popRanked = rankRoutes(currentGen, Hotel_list)
         selectionResults = Selection(popRanked, eliteSize).selectionPop()
         matingpool = MatingPool(currentGen, selectionResults).matingPool()
         children = Crossover(matingpool, eliteSize).breedPopulation()
         nextGeneration = mutatePopulation(children, mutationRate)
         return nextGeneration
             
-progress = []
-cityList = [(1.3521, 103.211), (1.3821, 104.512), (1.3421, 103.455)]
-popSize=20
-eliteSize=10
-mutationRate=0.01
-generations=500
 
-def geneticAlgorithm(population, popSize, eliteSize, mutationRate, generations):
-    pop = CreateRoute(cityList, popSize)
+def geneticAlgorithm(population, popSize, eliteSize, mutationRate, generations, Hotel_list):
+    progress = []
+    pop = CreateRoute(population, popSize)
     pop = pop.initialPopulation()
-    progress.append(1 / rankRoutes(pop)[0][1])
-    print("Initial distance: " + str(1 / rankRoutes(pop)[0][1]))
+    progress.append(1 / rankRoutes(pop, Hotel_list)[0][1])
+    print("Initial distance: " + str(1 / rankRoutes(pop, Hotel_list)[0][1]))
     
     for i in range(0, generations):
-        pop = NextGeneration.nextGeneration(pop, eliteSize, mutationRate)
-        progress.append(1 / rankRoutes(pop)[0][1])    
-    print("Final distance: " + str(1 / rankRoutes(pop)[0][1]))
-    bestRouteIndex = rankRoutes(pop)[0][0]
+        nextGen = NextGeneration(pop, eliteSize, mutationRate)
+        pop = nextGen.nextGeneration(pop,eliteSize,mutationRate,Hotel_list)
+        progress.append(1 / rankRoutes(pop, Hotel_list)[0][1])    
+    print("Final distance: " + str(1 / rankRoutes(pop, Hotel_list)[0][1]))
+    bestRouteIndex = rankRoutes(pop, Hotel_list)[0][0]
     bestRoute = pop[bestRouteIndex]
-    return bestRoute
+    Distance = sorted(progress)
+    print(Distance[0])
+    return bestRoute, Distance[0]
 
 
-bestRoute = geneticAlgorithm(cityList, popSize, eliteSize, mutationRate, generations)
 
-"""
-Location1
-Location2
-Location3
 
-Location4
-Location5
-Location6
-
-Location7
-Location8
-Location9
-
-"""
+#%%
+#import numpy as np, random, operator, pandas as pd, matplotlib.pyplot as plt
+#
+#
+#plt.figure(1)
+#plt.plot([bestRoute[i%25].x for i in range(26)],[bestRoute[i%25].y for i in range(26)],'ro-')  
+#plt.axis([0, 200, 0, 200])
+#
+#
+#
+#plt.figure(2)
+#plt.plot(progress)
+#plt.ylabel('Distance')
+#plt.xlabel('Generation')
+#plt.show()
+#"""
+#Location1
+#Location2
+#Location3
+#
+#Location4
+#Location5
+#Location6
+#
+#Location7
+#Location8
+#Location9
+#
+#"""

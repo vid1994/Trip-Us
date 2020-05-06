@@ -108,6 +108,8 @@ from email.mime.base import MIMEBase
 from email import encoders
 import smtplib
 from StaticMap import *
+from docx.enum.text import WD_BREAK
+from GeneticAlgoSearchSpace import geneticAlgorithm
 
 
 
@@ -121,7 +123,7 @@ def statesNotExplored(index, comb):
     
     return index2
 
-def DistanceNotExplored(index, Hotel_list):
+def DistanceNotExplored(index, Hotel_list,Attractions):
     distanceNotExplored = 0
     for item in index:
         locNotExplored = [(Attractions.iloc[item,1],Attractions.iloc[item,2])]
@@ -217,7 +219,7 @@ def tuple_to_int(test_tuple):
 
 
 
-def validComb(Comb):
+def validComb(Comb,Attractions):
     valid_comb = []
     for comb in Comb:
         totalTime = 0
@@ -254,8 +256,6 @@ def checkCurrentState(parent,child):
             parent[element1]=1
     return parent
 
-# a = checkCurrentState([1,0,1],[0,1,0])
-
     
     
 import os    
@@ -263,7 +263,7 @@ os.chdir("C:/Users/vidis/OneDrive/Desktop/RoadWarriors")
     
 from GeneticAlgoSearchSpace import geneticAlgorithm
 
-class Node():
+class Node_A():
     """A node class for A* Pathfinding"""
 
     def __init__(self, parent=None, position=None):
@@ -288,7 +288,7 @@ def Astar(Attractions, Hotel_list, start, end):
     
     """
     start_node = Node(None, start)
-    start_node.h = DistanceNotExplored(Attractions.index.tolist(),Hotel_list)
+    start_node.h = DistanceNotExplored(Attractions.index.tolist(),Hotel_list,Attractions)
     start_node.g = 0
     start_node.f = start_node.g + start_node.h
         
@@ -357,7 +357,7 @@ def Astar(Attractions, Hotel_list, start, end):
             valid_child_combs = convert_to_tuple(Attractions_filtered.index.tolist())
         else:
             child_combs = Comb(current_node.position, Attractions_filtered, combinations_to_analyse=[2])
-            valid_child_combs = validComb(child_combs)
+            valid_child_combs = validComb(child_combs,Attractions)
         for child_comb in valid_child_combs:
             path_list = []
             for element in child_comb:
@@ -389,7 +389,7 @@ def Astar(Attractions, Hotel_list, start, end):
             generations = 300
             bestRoute, child.g = geneticAlgorithm(path_list, popSize, eliteSize, mutationRate, generations, Hotel_list)
             index = statesNotExplored(Attractions.index.tolist(),child_comb)
-            child.h = DistanceNotExplored(index,Hotel_list)
+            child.h = DistanceNotExplored(index,Hotel_list,Attractions)
             child.f = child.g + child.h
             CombScore = [child_comb, bestRoute, child.position, child.g, child.h, child.f]
             ScoreList.append(CombScore)
@@ -537,7 +537,7 @@ def GreedyBestFirstSearch(Attractions, Hotel_list, start, end, duration, combina
             print(current_node.position)
             print(combinations_to_analyse)
             child_combs = Comb(current_node.position, Attractions_filtered, combinations_to_analyse)
-            valid_child_combs = validComb(child_combs)
+            valid_child_combs = validComb(child_combs,Attractions)
             print(valid_child_combs)
             
         i = 0    
@@ -764,13 +764,8 @@ def convert_cds_to_tuple(Latitudes, Longitudes):
     
     return cds_tuple
 
-# Latitudes = [1,2,3,4,5,6]
-# Longitudes = [7,8,9,10,11,12]
-# cds_tuple = convert_cds_to_tuple(Latitudes, Longitudes)
 
         
-        
-
 def Attractions_Db():
 
     Mongourl = "mongodb+srv://vidish:tripatus@cluster0-jzyrn.mongodb.net/test"
@@ -836,9 +831,6 @@ def squareList(list2):
 
 
 
-from docx.enum.text import WD_BREAK
-
-
 def createDocument(username):
 
     document = Document()
@@ -888,6 +880,8 @@ def createDocument(username):
             print(Hotel_marker)
         marker_outline = CircleMarker(Hotel_marker, 'white', 18)
         marker = CircleMarker(Hotel_marker, '#0036FF', 12)
+        map.add_marker(marker)
+        map.add_marker(marker_outline)
         map.add_line(line)
         image = map.render()
         image.save('TourPlan.png')
@@ -936,9 +930,8 @@ def send_email(user_email, username):
 
 
 
-username='vidish'
 
-if __name__ == "__main__":
+def plan_my_trip(username, user_email):
     Attractions, duration, Hotel, Hotel_list = AttractionsToVisit(username)
     print(duration)
     combinations_to_analyse = CombinationsToAnalyse(Attractions, duration)
@@ -950,11 +943,6 @@ if __name__ == "__main__":
     DayPaths = DailyPathsUpdate(username, Attractions, path_taken)
     createDocument(username)
     send_email(user_email, username)
-
-    
-
-
-
 
 
 

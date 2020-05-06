@@ -2,17 +2,18 @@
 """
 Created on Sat Apr 11 23:29:17 2020
 
-@author: vidis
+@author: vidish
 """
 
 import geocoder
-from .LocationOptimizer import SearchSpace, NodeOptimizer
 import numpy as np
 import pandas as pd
 from math import radians, cos, sin, asin, sqrt
 from pymongo import MongoClient
 import dns
 import os
+from .LocationOptimizer import SearchSpace, NodeOptimizer
+
 
 querydict = {'csrfmiddlewaretoken': ['sB3Epv7sTssiWe57L3OUeE3yJJzLwgWVlbKjBiTNQTK07127WlZR7AaG5D5LrD0h'], 'Location1': ['afadsf'], 'Preference1': ['adsfa'], 'Location2': ['asdf'], 'Preference2': ['asdfasdf'], 'Location3': ['asfdasd'], 'Preference3': ['fasdfas'], 'Location4': ['dfsdfsadf'], 'Preference4': ['asdfasdf'], 'Location5': ['asdfsd'], 'Preference5': ['fasdfsa'], 'Location6': ['fsdafsd'], 'Preference6': ['fsafdsf'], 'Rating': ['fsdfas'], 'HotelPrice': ['asdf']}
 Location = querydict['Location1'][0]

@@ -2,7 +2,7 @@
 """
 Created on Tue May  5 14:38:49 2020
 
-@author: vidis
+@author: vidish
 """
 
 import itertools
@@ -507,12 +507,3 @@ class StaticMap:
             )
             image.paste(icon.img, position, icon.img)
 
-# import os
-
-# if __name__ == '__main__':
-#     map = StaticMap(300, 400, 10)
-#     line = Line([(103.21, 1.34), (103.45, 1.38)], 'blue', 3)
-#     map.add_line(line)
-#     image = map.render()
-#     print(os.getcwd())
-#     image.save('berlin_paris.png')
