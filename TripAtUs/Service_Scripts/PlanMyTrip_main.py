@@ -106,8 +106,7 @@ from email import encoders
 import smtplib
 from .StaticMap import *
 from docx.enum.text import WD_BREAK
-from GeneticAlgoSearchSpace import geneticAlgorithm
-
+from .GeneticAlgoSearchSpace import geneticAlgorithm
 
 
 def statesNotExplored(index, comb):
@@ -408,13 +407,7 @@ computes only based on f(x) = h(x)
 
 """
 
-
-import os    
-os.chdir("C:/Users/vidis/OneDrive/Desktop/RoadWarriors")
     
-from GeneticAlgoSearchSpace import geneticAlgorithm
-
-
 class Node():
     """A node class for A* Pathfinding"""
 
@@ -876,8 +869,6 @@ def createDocument(username):
     
     Attraction_Df = Attractions_Db()
     travelPlan, Hotel, Hotel_Latitude, Hotel_Longitude = UserTravelData(username)
-    
-    
     
     Mongourl = "mongodb+srv://vidish:tripatus@cluster0-jzyrn.mongodb.net/test"
         
