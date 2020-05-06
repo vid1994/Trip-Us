@@ -1,16 +1,28 @@
 from celery import Celery
 from .PlanMyTrip_main import plan_my_trip
 from pymongo import MongoClient
+from celery.task.schedules import crontab
+from celery.decorators import periodic_task
+from celery import shared_task
+from celery.utils.log import get_task_logger
 
-app = Celery('tasks', broker='pyamqp://guest@localhost//')
+logger = get_task_logger(__name__)
 
 
-@app.task
+#app = Celery('tasks', broker='pyamqp://guest@localhost//')
+
+
+@shared_task
+def test_celery_worker():
+    print("Celery Workers are working fine.")
+
+
+@shared_task
 def add(x, y):
     return x + y
 
 
-@app.task
+@shared_task
 def Plan_My_trip(username,email):
     Mongourl = "mongodb+srv://vidish:tripatus@cluster0-jzyrn.mongodb.net/test"
     
