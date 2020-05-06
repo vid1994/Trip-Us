@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django.contrib.gis',
     'leaflet',
-    'django_celery_beat'
+    'django_celery_beat',
 
     #own
     'accounts',
