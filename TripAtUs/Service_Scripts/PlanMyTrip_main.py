@@ -104,9 +104,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
 import smtplib
-from .StaticMap import *
+from StaticMap import *
 from docx.enum.text import WD_BREAK
-from .GeneticAlgoSearchSpace import geneticAlgorithm
+from GeneticAlgoSearchSpace import geneticAlgorithm
 
 
 def statesNotExplored(index, comb):
@@ -655,9 +655,9 @@ def timeSpent(Attractions):
     collection = db.AttractionDB
     
     
-    print("-------------CONNECTION SUCCESSFUL----------------------")
+    print("-----------------CONNECTION SUCCESSFUL----------------------")
     
-    Attractions = []
+    Attractions_list = []
     Categories = []
     Likeability_Solo = []
     Likeability_Family = []
@@ -669,7 +669,7 @@ def timeSpent(Attractions):
     Image_Path = []
         
     for doc in collection.find():
-        Attractions.append(doc['PAGETITLE'])
+        Attractions_list.append(doc['PAGETITLE'])
         Categories.append(doc['Leaf Node Category'])
         Likeability_Solo.append(doc['Likeability Solo'])
         Likeability_Family.append(doc['Likeability Family'])
@@ -680,10 +680,11 @@ def timeSpent(Attractions):
         Description.append(doc['Description'])
         Image_Path.append(doc['Image Path'])
     
+    print(Attractions)
     
     Likeability_Df = pd.DataFrame()
     
-    Likeability_Df['Attractions'] = Attractions
+    Likeability_Df['Attractions'] = Attractions_list
     Likeability_Df['Attraction Category'] = Categories
     Likeability_Df['Popularity (solo)'] = [float(x) for x in Likeability_Solo]
     Likeability_Df['Popularity (Family)'] = [float(x) for x in Likeability_Family]
@@ -694,12 +695,13 @@ def timeSpent(Attractions):
     Likeability_Df['Description'] = Description
     Likeability_Df['Image Path'] = Image_Path
 
-    
+    print(Likeability_Df)
     TimeSpent = []
     for locations in Attractions['Location'].tolist():
         temp_df = Likeability_Df[Likeability_Df['Attractions'] == locations]
-        TimeSpent.append(temp_df['Time Spent'])
-    
+        TimeSpent.append(temp_df['Time Spent'].tolist())
+    print(TimeSpent)
+    print(len(TimeSpent))
     Attractions['Time Spent'] = flatten(TimeSpent)
     
     return Attractions
@@ -964,8 +966,8 @@ def plan_my_trip(username, user_email):
     createDocument(username)
     send_email(user_email, username)
 
-
-
+# for testing
+# plan_my_trip('park','park@gmail.com')
 
 
 
