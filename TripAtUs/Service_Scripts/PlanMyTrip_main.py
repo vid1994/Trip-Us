@@ -104,9 +104,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
 import smtplib
-from .StaticMap import *
+from StaticMap import *
 from docx.enum.text import WD_BREAK
-from .GeneticAlgoSearchSpace import geneticAlgorithm
+from GeneticAlgoSearchSpace import geneticAlgorithm
 
 
 def statesNotExplored(index, comb):
@@ -938,7 +938,7 @@ def send_email(user_email, username):
     msg['Subject'] = "Trip@Us Itinerary Report"
     body = "Hi %s, \n \n Please find attached your curated itinerary for your visit to Singapore. \n \n We sincerely hope you enjoy your trip to Singapore and while you are there do check out our dynamic planning telebot travelBot for planning on the go :) \n \n Thank you, \n Trip@Us Team"%(username)
     msg.attach(MIMEText(body,'plain'))
-    filename = 'Trip@Us Itinerary Report.pdf'
+    filename = 'TravelPlan_Trip@Us'
     attachment=open("TravelPlan_Trip@Us.docx",'rb')
     part = MIMEBase('application', 'octet-stream')
     part.set_payload((attachment).read())
@@ -967,7 +967,7 @@ def plan_my_trip(username, user_email):
     send_email(user_email, username)
 
 # for testing
-# plan_my_trip('park','park@gmail.com')
+plan_my_trip('park','park@gmail.com')
 
 
 
