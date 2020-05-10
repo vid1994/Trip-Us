@@ -49,7 +49,7 @@ But wait, theres more. We do not just stop at planning as we understand tourists
 ---
 ## SECTION 6 : PROJECT REPORT / PAPER
 
-`<Github File Link>` : <https://github.com/vid1994/TripAtUs>
+`<Github File Link>` : https://github.com/vid1994/TripAtUs/blob/master/Project%20Report/Trip%40Us%20Final%20Project%20Report.pdf
 
 ---
 ## SECTION 7 : MISCELLANEOUS
