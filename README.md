@@ -2,7 +2,7 @@
 ## SECTION 1 : PROJECT TITLE
 ## SG Trippingo - Singapore Attractions Recommender & Itinerary Planner
 
-<img src="TripAtUs\static\assets\img\portfolio\BgLogin.jpg"
+<img src="TripAtUs\static\assets\img\portfolio\sgp2.jpg"
      style="float: left; margin-right: 0px;" />
 
 
@@ -68,7 +68,7 @@ python manage.py runserver
 ---
 ## SECTION 6 : PROJECT REPORT / PAPER
 
-`<Github File Link>` : <https://github.com/vid1994/Trip-Us>
+`<Github File Link>` : <https://github.com/vid1994/TripAtUs>
 
 ---
 ## SECTION 7 : MISCELLANEOUS
