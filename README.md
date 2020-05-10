@@ -1,6 +1,6 @@
 
 ## SECTION 1 : PROJECT TITLE
-## SG Trippingo - Singapore Attractions Recommender & Itinerary Planner
+## Trip@Us - Your travel buddy from Planning to Execution
 
 <img src="TripAtUs\static\assets\img\portfolio\sgp2.jpg"
      style="float: left; margin-right: 0px;" />
