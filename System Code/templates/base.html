@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Trip@Us</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  </head>   
+<body style="background: url(/static/assets/img/portfolio/sgbkgrnd1.jpg) no-repeat ; background-size: cover; background-position-y: 70px;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href=""><h2>Trip@Us</h2></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto my-2 my-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'login' %}"><h4><span style="font-weight: 900;color: honeydew; margin-left: 1000px ;font-size: large ; position: relative;">Login</span></h4><span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'signup' %}"><h4><span style="font-weight: 900;color: honeydew; font-size: large; margin-left: 50px;">Register</span></h4><span class="sr-only">(current)</span></a>
+            </li> 
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'logout' %}"><h4><span style="font-weight: 900; color:honeydew; font-size : large; margin-left: 50px;">Logout</span></h4><span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+    {% block content %}
+
+    {% endblock %}
+</body>
+</html>
+

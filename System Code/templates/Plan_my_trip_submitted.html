@@ -1,0 +1,17 @@
+{% extends 'MainBase.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load leaflet_tags %}
+
+<div class="jumbotron text-center">
+    <h2 class="display-3">We have processed your request. Please check your email in 30 mins to find your curated itinerary</h2>
+    <h3 class="h3"> Please check your spam folder in case you are unable to find your email</h3>
+    <p class="lead">We hope you have a great trip in Singapore. For dynamic planning during the trip please check out our telebot below!</p>
+    <hr>
+    <p class="lead">
+      <a class="btn btn-primary btn-sm" href="{% url 'Telebot' %}" role="button" style="padding: 15px; font-size: 16px;">TravelBot - Our Dynamic Planner</a>
+    </p>
+</div>
+
+{% endblock %}
