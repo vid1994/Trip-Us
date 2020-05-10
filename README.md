@@ -31,7 +31,7 @@ But wait, theres more. We do not just stop at planning as we understand tourists
 ---
 ## SECTION 4 : VIDEO OF SYSTEM MODELLING & USE CASE DEMO
 
-[Project Video](https://www.youtube.com/watch?v=uRw_DnBMakg)
+[Project Video](https://youtu.be/HRs56EQ9CAA)
 
 
 ---
