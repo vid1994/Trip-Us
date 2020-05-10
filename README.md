@@ -35,35 +35,15 @@ But wait, theres more. We do not just stop at planning as we understand tourists
 
 
 ---
-## SECTION 5 : USER GUIDE
+## SECTION 5 : INSTALLATION AND USER GUIDE
 
-`<Github File Link>` : /UserGuide folder
+### USER GUIDE
 
-### [ 1 ] Run Trippingo (Backend)
+`<Github File Link>` : https://github.com/vid1994/TripAtUs/tree/master/Installation%20%26%20User%20Guide
 
-> Download jar file from latest [release](https://github.com/vid1994/Trip-Us) into a new project directory
+### INSTALLATION GUIDE
 
-> Navigate to project directory and execute the command below in command line:
-
-```bash
-python main.py runserver
-```
-
-> API will be available on 8000 port of the localhost
-
-### [ 2 ] Run Trippingo-Web (Frontend)
-
-> Use the package manager [pip](https://pip.pypa.io/en/stable/) to install application dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-> Start the Django application from [Trippingo-Web project](https://github.com/vidur6789/trippingo-web) directory in terminal
-
-```bash
-python manage.py runserver
-```
+`<Github File Link>` : https://github.com/vid1994/TripAtUs/tree/master/Installation%20%26%20User%20Guide
 
 ---
 ## SECTION 6 : PROJECT REPORT / PAPER
