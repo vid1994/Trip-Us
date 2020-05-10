@@ -2,7 +2,7 @@
 ## SECTION 1 : PROJECT TITLE
 ## Trip@Us - Your travel buddy from Planning to Execution
 
-<img src="TripAtUs\static\assets\img\portfolio\sgp2.jpg"
+<img src="System Code\static\assets\img\portfolio\sgp2.jpg"
      style="float: left; margin-right: 0px;" />
 
 
