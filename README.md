@@ -2,7 +2,7 @@
 ## SECTION 1 : PROJECT TITLE
 ## SG Trippingo - Singapore Attractions Recommender & Itinerary Planner
 
-<img src="SystemCode/cover.png"
+<img src="TripAtUs\static\assets\img\portfolio\BgLogin.jpg"
      style="float: left; margin-right: 0px;" />
 
 
@@ -22,7 +22,7 @@ But wait, theres more. We do not just stop at planning as we understand tourists
 
 | Official Full Name  | Student ID  | Work Items |
 | :---------------- |:---------------:| :-----|
-| Mehta Vidish Pranav | A0213523U  | Project Leader, Initial proposal, mid project presentation and final project documentation. Core Programming and algorithm development (Attraction Selection, Book My Hotel, Plan My Trip and Telebot). Django UI Interface developer & Django API developer. Celery and rabbitmq integration to ubuntu iss-vm.|
+| Mehta Vidish Pranav | A0213523U  | Project Leader, Initial proposal, mid project presentation and final project documentation. Core Programming and algorithm development (Attraction Selection, Book My Hotel, Plan My Trip and Telebot). Django UI Interface developer & Django API developer. Celery and rabbitmq integration to ubuntu iss-vm. Project Video|
 | Anandan Natarajan | A0213514U  | Project Management, Proposal Expansion, Data Sourcing, Data Massaging, Prototype design, System Architecture, Database Design, Flow Diagrams, Testing,  Implementation & Testing, Project Management & Documentation|
 | Ankeit Taksh| A0213496B   |  Proposal Expansion, System Architecture, Environment Engineering & DevOps,  Programming and algorithm development (Telebot). Django UI Interface developer. Implementation & Testing,, Association Mining, Association Knowledge Representation, Association Recommendation User Interface|
 | Wang Kuan-Kai | A0198539H  | Project Management, Proposal Expansion, Data Sourcing, Data Massaging, Prototype design,  Mid project presentation and final project documentation Implementation & Testing, Project Management & Documentation|
