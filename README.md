@@ -44,7 +44,7 @@ But wait, theres more. We do not just stop at planning as we understand tourists
 
 ### INSTALLATION GUIDE
 
-`<Github File Link>` : https://github.com/vid1994/TripAtUs/tree/master/Installation%20%26%20User%20Guide
+`<Github File Link>` : https://github.com/vid1994/TripAtUs/blob/master/Installation%20%26%20User%20Guide/Installation%20Guide%20-%20Trip%20At%20Us.pdf
 
 ---
 ## SECTION 6 : PROJECT REPORT / PAPER
