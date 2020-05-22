@@ -20,7 +20,7 @@ beautifulsoup4==4.8.2
 billiard==3.6.3.0
 bitarray==1.2.1
 bkcharts==0.2
-bleach==3.1.0
+bleach==3.1.4
 blessed==1.17.5
 bokeh==1.4.0
 bondpy==1.8.3
