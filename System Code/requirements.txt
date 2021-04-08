@@ -54,7 +54,7 @@ diagnostic-common-diagnostics==1.9.3
 diagnostic-updater==1.9.3
 diff-match-patch==20181111
 distributed==2.11.0
-Django==2.2.12
+Django==2.2.20
 django-celery-beat==2.0.0
 django-crispy-forms==1.9.0
 django-leaflet==0.26.0
